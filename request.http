@@ -1,4 +1,41 @@
+### SIGNIN
+POST http://localhost:3000/login/signin HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"adminUser",
+    "password":"adminPass"
+}
+
+### SIGNUP
+POST http://localhost:3000/login/signup HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"userUser",
+    "password":"userPass",
+    "role":"user",
+    "createdDate":"02/02/2022"
+}
+
+### Check Token And Update Token
+GET http://localhost:3000/login/checkToken
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZmIyZTU5OWU3NTlmMzE0OGNkMDEzNyIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZSI6MTY0Mzg3MjE0MywiZXhwIjoxNjQzODcyNDMwLCJpYXQiOjE2NDM4NzIxNDN9.z6G2TCwS33yJ9uk1KRWkk9M2M3Z9bM2BuHlMVBtMYqQ
+role:admin
+
 ###
+###
+###
+###
+###
+###
+###
+###
+###
+###
+###
+###
+### CREATE ONE
 POST http://localhost:3000/login HTTP/1.1
 Content-Type: application/json
 
@@ -9,11 +46,11 @@ Content-Type: application/json
     "createdDate":"02/02/2022"
 }
 
-###
+### GET ALL
 GET http://localhost:3000/login HTTP/1.1
 
-###
-GET http://localhost:3000/login/123 HTTP/1.1
+### GET ONE
+GET http://localhost:3000/login/61fb2e599e759f3148cd0137 HTTP/1.1
 
-###
-DELETE http://localhost:3000/login/123 HTTP/1.1
+### DELETE ONE
+DELETE http://localhost:3000/login/61fb2e599e759f3148cd0137 HTTP/1.1
