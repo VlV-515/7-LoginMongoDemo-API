@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const loginSchema = require("../models/loginModel");
 const loginController = require("../controllers/loginController");
+const jwtController = require("../controllers/jwtController");
 
 //SignUp
 router.post("/signup", (req, res) => {
@@ -20,14 +21,12 @@ router.post("/signin", (req, res) => {
     .then((response) => {
       //Check Username
       if (response.length == 0) {
-        res.status(400).json({ msg: "Usuario invalido" });
-        return;
+        return res.status(400).json({ msg: "Usuario invalido" });
       }
       //Check Password
       const { password: passDB } = response[0];
       if (!loginController.checkPassword(passFront, passDB)) {
-        res.status(400).json({ msg: "Contraseña invalida" });
-        return;
+        return res.status(400).json({ msg: "Contraseña invalida" });
       }
       //All OK
       const id = String(response[0]._id);
@@ -38,7 +37,7 @@ router.post("/signin", (req, res) => {
         id: id,
         username: username,
         role: role,
-        token: loginController.generateToken(id, role),
+        token: jwtController.generateToken(id, role),
       };
       res.status(200).json(params);
     })
@@ -47,12 +46,11 @@ router.post("/signin", (req, res) => {
 //Check Token
 router.get("/checkToken", (req, res) => {
   const { token, role } = req.headers;
-  if (loginController.checkToken(token, role)) {
-    res.status(200).json({
+  if (jwtController.checkToken(token, role)) {
+    return res.status(200).json({
       msg: "ok",
-      newToken: loginController.updateToken(token),
+      newToken: jwtController.updateToken(token),
     });
-    return;
   }
   res.status(400).json({ msg: "Error de autorizacion" });
 });
