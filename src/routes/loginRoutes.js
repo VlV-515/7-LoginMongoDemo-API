@@ -34,6 +34,15 @@ router.post("/signin", (req, res) => {
     })
     .catch(() => res.json({ msg: "Error al hacer signin" }));
 });
+//Check Token
+router.get("/checkToken", (req, res) => {
+  const { token, role } = req.headers;
+  if (loginController.checkToken(token, role)) {
+    res.json({ msg: "ok" });
+    return;
+  }
+  res.json({ msg: "Error de autorizacion" });
+});
 /* CRUD DEFAULT */
 //Create
 router.post("/", (req, res) => {

@@ -17,6 +17,13 @@ Content-Type: application/json
     "role":"user",
     "createdDate":"02/02/2022"
 }
+
+### Check Token
+GET http://localhost:3000/login/checkToken
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZmIyZTU5OWU3NTlmMzE0OGNkMDEzNyIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZSI6MTY0Mzg3MDE3NiwiZXhwIjoxNjQzODczNzc2LCJpYXQiOjE2NDM4NzAxNzZ9.Qh6WF90Q5cExeJVm3yyMc7zmhotxiiAPmVN7aQ4EaIU
+role:admin
+
+
 ###
 ###
 ###
