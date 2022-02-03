@@ -7,8 +7,8 @@ const loginController = require("../controllers/loginController");
 router.post("/signup", (req, res) => {
   loginSchema(req.body)
     .save()
-    .then((data) => res.json({ msg: "ok" }))
-    .catch(() => res.json({ msg: "Error al hacer signup" }));
+    .then((data) => res.status(200).json({ msg: "ok" }))
+    .catch(() => res.status(400).json({ msg: "Error al hacer signup" }));
 });
 //SignIn
 router.post("/signin", (req, res) => {
@@ -17,7 +17,7 @@ router.post("/signin", (req, res) => {
     .find({ username, password })
     .then((response) => {
       if (response.length == 0) {
-        res.json({ msg: "Credenciales invalidas" });
+        res.status(400).json({ msg: "Credenciales invalidas" });
         return;
       }
       const id = String(response[0]._id);
@@ -30,21 +30,21 @@ router.post("/signin", (req, res) => {
         role: role,
         token: loginController.generateToken(id, role),
       };
-      res.json(params);
+      res.status(200).json(params);
     })
-    .catch(() => res.json({ msg: "Error al hacer signin" }));
+    .catch(() => res.status(400).json({ msg: "Error al hacer signin" }));
 });
 //Check Token
 router.get("/checkToken", (req, res) => {
   const { token, role } = req.headers;
   if (loginController.checkToken(token, role)) {
-    res.json({
+    res.status(200).json({
       msg: "ok",
       newToken: loginController.updateToken(token),
     });
     return;
   }
-  res.json({ msg: "Error de autorizacion" });
+  res.status(400).json({ msg: "Error de autorizacion" });
 });
 /* CRUD DEFAULT */
 /* CRUD DEFAULT */
