@@ -14,14 +14,22 @@ router.post("/signup", (req, res) => {
 });
 //SignIn
 router.post("/signin", (req, res) => {
-  const { username, password } = req.body;
+  const { username, password: passFront } = req.body;
   loginSchema
-    .find({ username, password })
+    .find({ username })
     .then((response) => {
+      //Check Username
       if (response.length == 0) {
-        res.status(400).json({ msg: "Credenciales invalidas" });
+        res.status(400).json({ msg: "Usuario invalido" });
         return;
       }
+      //Check Password
+      const { password: passDB } = response[0];
+      if (!loginController.checkPassword(passFront, passDB)) {
+        res.status(400).json({ msg: "Contraseña invalida" });
+        return;
+      }
+      //All OK
       const id = String(response[0]._id);
       const username = String(response[0].username);
       const role = String(response[0].role);

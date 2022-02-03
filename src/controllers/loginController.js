@@ -35,4 +35,13 @@ function hashPassword(password) {
   const salt = bcrypt.genSaltSync(10);
   return bcrypt.hashSync(password, salt);
 }
-module.exports = { generateToken, checkToken, updateToken, hashPassword };
+function checkPassword(passFront, passDB) {
+  return bcrypt.compareSync(passFront, passDB);
+}
+module.exports = {
+  generateToken,
+  checkToken,
+  updateToken,
+  hashPassword,
+  checkPassword,
+};
