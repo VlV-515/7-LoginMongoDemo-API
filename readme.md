@@ -6,6 +6,7 @@ mongoose
 nodemon
 jsonwebtoken
 bcryptjs
+momentjs
 
 Extensiónes
 REST Client
