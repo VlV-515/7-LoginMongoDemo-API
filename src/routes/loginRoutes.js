@@ -4,7 +4,12 @@ const loginSchema = require("../models/loginModel");
 const loginController = require("../controllers/loginController");
 
 //SignUp
-//TODO:Hacer la parte de signUp
+router.post("/signup", (req, res) => {
+  loginSchema(req.body)
+    .save()
+    .then((data) => res.json({ msg: "ok" }))
+    .catch(() => res.json({ msg: "Error al hacer signup" }));
+});
 //SignIn
 router.post("/signin", (req, res) => {
   const { username, password } = req.body;
