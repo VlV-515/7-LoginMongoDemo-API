@@ -15,14 +15,14 @@ router.post("/signin", (req, res) => {
   const { username, password } = req.body;
   loginSchema
     .find({ username, password })
-    .then((user) => {
-      if (user.length == 0) {
+    .then((response) => {
+      if (response.length == 0) {
         res.json({ msg: "Credenciales invalidas" });
         return;
       }
-      const id = String(user[0]._id);
-      const username = String(user[0].username);
-      const role = String(user[0].role);
+      const id = String(response[0]._id);
+      const username = String(response[0].username);
+      const role = String(response[0].role);
       const params = {
         msg: "ok",
         id: id,
@@ -38,11 +38,16 @@ router.post("/signin", (req, res) => {
 router.get("/checkToken", (req, res) => {
   const { token, role } = req.headers;
   if (loginController.checkToken(token, role)) {
-    res.json({ msg: "ok" });
+    res.json({
+      msg: "ok",
+      newToken: loginController.updateToken(token),
+    });
     return;
   }
   res.json({ msg: "Error de autorizacion" });
 });
+/* CRUD DEFAULT */
+/* CRUD DEFAULT */
 /* CRUD DEFAULT */
 //Create
 router.post("/", (req, res) => {
