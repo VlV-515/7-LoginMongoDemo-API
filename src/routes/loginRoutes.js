@@ -5,6 +5,8 @@ const loginController = require("../controllers/loginController");
 
 //SignUp
 router.post("/signup", (req, res) => {
+  //Hash Password
+  req.body.password = loginController.hashPassword(req.body.password);
   loginSchema(req.body)
     .save()
     .then((data) => res.status(200).json({ msg: "ok" }))

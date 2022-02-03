@@ -1,9 +1,9 @@
 const moment = require("moment");
 const jwt = require("jsonwebtoken");
 const expTimeJWT = moment().add(5, "minute").unix();
+const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
-//TODO: Generate Token
 function generateToken(id, role) {
   const payload = {
     id: id + "",
@@ -13,7 +13,6 @@ function generateToken(id, role) {
   };
   return jwt.sign(payload, process.env.JWT_KEY);
 }
-//TODO: Check Token
 function checkToken(token, role) {
   try {
     const jwtDecode = jwt.verify(token, process.env.JWT_KEY);
@@ -22,7 +21,6 @@ function checkToken(token, role) {
     return false;
   }
 }
-//TODO: Update Token
 function updateToken(token) {
   const jwtDecode = jwt.verify(token, process.env.JWT_KEY);
   const payload = {
@@ -33,4 +31,8 @@ function updateToken(token) {
   };
   return jwt.sign(payload, process.env.JWT_KEY);
 }
-module.exports = { generateToken, checkToken, updateToken };
+function hashPassword(password) {
+  const salt = bcrypt.genSaltSync(10);
+  return bcrypt.hashSync(password, salt);
+}
+module.exports = { generateToken, checkToken, updateToken, hashPassword };
