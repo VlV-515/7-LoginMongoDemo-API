@@ -1,9 +1,9 @@
 const moment = require("moment");
 const jwt = require("jsonwebtoken");
-const expTimeJWT = moment().add(5, "minute").unix();
 require("dotenv").config();
 
 function generateToken(id, role) {
+  const expTimeJWT = moment().add(5, "minute").unix();
   const payload = {
     id: id + "",
     role: role + "",
@@ -22,6 +22,7 @@ function checkToken(token, role) {
 }
 function updateToken(token) {
   const jwtDecode = jwt.verify(token, process.env.JWT_KEY);
+  const expTimeJWT = moment().add(5, "minute").unix();
   const payload = {
     id: jwtDecode.id,
     role: jwtDecode.role,
