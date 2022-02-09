@@ -20,8 +20,9 @@ Content-Type: application/json
 
 ### Check Token And Update Token
 GET http://localhost:3000/login/checkToken
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZmIyZTU5OWU3NTlmMzE0OGNkMDEzNyIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZSI6MTY0Mzg3MjE0MywiZXhwIjoxNjQzODcyNDMwLCJpYXQiOjE2NDM4NzIxNDN9.z6G2TCwS33yJ9uk1KRWkk9M2M3Z9bM2BuHlMVBtMYqQ
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluVXNlciIsImNyZWF0ZSI6MTY0NDQzMjMwMSwiZXhwIjoxNjQ0NDMyNjAxLCJpYXQiOjE2NDQ0MzIzMDF9.WNNmecAXzbkv-CeZ8KWYe-fJIB7m2ewtP6L8E6mG3g8
 role:admin
+username:adminUser
 
 ###
 ###

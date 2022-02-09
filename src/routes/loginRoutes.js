@@ -34,10 +34,9 @@ router.post("/signin", (req, res) => {
       const role = String(response[0].role);
       const params = {
         msg: "ok",
-        id: id,
         username: username,
         role: role,
-        token: jwtController.generateToken(id, role),
+        token: jwtController.generateToken(role, username),
       };
       res.status(200).json(params);
     })
@@ -45,12 +44,13 @@ router.post("/signin", (req, res) => {
 });
 //Check Token
 router.get("/checkToken", (req, res) => {
-  const { token, role } = req.headers;
-  if (jwtController.checkToken(token, role)) {
+  const { token, role, username } = req.headers;
+  if (jwtController.checkToken(token, role, username)) {
     return res.status(200).json({
       msg: "ok",
-      newToken: jwtController.updateToken(token),
+      username: username,
       role: role,
+      newToken: jwtController.generateToken(role, username),
     });
   }
   res.status(400).json({ msg: "Error de autorizacion" });
