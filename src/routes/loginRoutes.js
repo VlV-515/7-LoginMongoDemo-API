@@ -50,6 +50,7 @@ router.get("/checkToken", (req, res) => {
     return res.status(200).json({
       msg: "ok",
       newToken: jwtController.updateToken(token),
+      role: role,
     });
   }
   res.status(400).json({ msg: "Error de autorizacion" });
