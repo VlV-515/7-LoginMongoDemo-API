@@ -48,8 +48,6 @@ router.get("/checkToken", (req, res) => {
   if (jwtController.checkToken(token, role, username)) {
     return res.status(200).json({
       msg: "ok",
-      username: username,
-      role: role,
       newToken: jwtController.generateToken(role, username),
     });
   }
